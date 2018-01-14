@@ -12,8 +12,6 @@
         [JsonProperty("id")]
         public string ID { get; set; }
 
-      
-
         /// <summary>
         /// Gets or sets the amount in pennies. 
         /// </summary>
@@ -27,5 +25,12 @@
         /// <value>The merchant.</value>
         [JsonProperty("merchant")]
         public Merchant Merchant { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date time the Transaction was created. 
+        /// </summary>
+        /// <value>The created.</value>
+        [JsonProperty("created")]
+        public DateTime Created { get; set; }
     }
 }

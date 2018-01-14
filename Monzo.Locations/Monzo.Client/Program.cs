@@ -26,17 +26,20 @@
                 Console.WriteLine(auth);
             }
 
+            Console.WriteLine("ID\tDesciption\t");
             var accounts = service.GetAccounts();
             foreach(var account in accounts.AccountList)
             {
-                Console.WriteLine(account.ID);
+                Console.WriteLine(account.ID + "\t" + account.Description);
             }
 
+
+            Console.WriteLine("ID\tName\tCreated\tLatitude\tLongitude\t");
             var transactions = service.GetPhysicalTransactions(accounts.AccountList.ElementAt(1)); 
 
             foreach(var t in transactions.TransactionList)
             {
-                Console.Write(t.ID + "\t" + t.Merchant.Name); 
+                Console.Write(t.ID + "\t" + t.Merchant.Name + "\t" + t.Created); 
                 if (t.Merchant != null)
                 {
                     if (t.Merchant.Address != null)
