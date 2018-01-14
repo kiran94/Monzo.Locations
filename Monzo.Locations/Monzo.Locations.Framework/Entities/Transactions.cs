@@ -13,6 +13,6 @@
         /// </summary>
         /// <value>The transactions.</value>
         [JsonProperty("transactions")]
-        public List<Transaction> TransactionList { get; set; }
+        public IEnumerable<Transaction> TransactionList { get; set; }
     }
 }
