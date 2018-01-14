@@ -1,6 +1,5 @@
 ﻿namespace Monzo.Locations.Framework.Contracts
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 

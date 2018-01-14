@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Monzo.Locations.Framework.Services;
-
-namespace Monzo.Client
+﻿namespace Monzo.Client
 {
-    class MainClass
+    using System;
+    using Monzo.Locations.Framework.Services;
+
+    public class MainClass
     {
         public static void Main(string[] args)
         {
@@ -35,7 +34,5 @@ namespace Monzo.Client
             Console.ReadLine();
 
         }
-
-       
     }
 }

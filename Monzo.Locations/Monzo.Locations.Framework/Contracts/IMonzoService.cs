@@ -1,6 +1,5 @@
 ﻿namespace Monzo.Locations.Framework.Contracts
 {
-    using System;
     using Monzo.Locations.Framework.Entities;
 
     /// <summary>

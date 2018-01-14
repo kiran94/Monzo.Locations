@@ -1,6 +1,5 @@
 ﻿namespace Monzo.Locations.Framework.Entities
 {
-    using System;
     using Newtonsoft.Json;
 
     /// <summary>

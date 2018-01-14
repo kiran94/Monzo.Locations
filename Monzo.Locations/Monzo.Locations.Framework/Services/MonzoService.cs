@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Monzo.Locations.Framework.Contracts;
     using Monzo.Locations.Framework.Entities;
     using Newtonsoft.Json;
