@@ -1,16 +1,14 @@
-﻿using System;
-using Monzo.Locations.Framework.Contracts;
-
-namespace Monzo.Locations.Framework.Services
+﻿namespace Monzo.Locations.Framework.Services
 {
+    using System;
+    using Monzo.Locations.Framework.Contracts;
+
+    /// <inheritdoc />
     public class ConfigurationService : IConfigurationService
     {
-        public ConfigurationService()
-        {
-        }
-
+        /// <inheritdoc />
         public string GetEnviroment(string name)
-        {
+        {           
             return Environment.GetEnvironmentVariable(name);
         }
     }
