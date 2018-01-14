@@ -29,6 +29,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -36,10 +39,17 @@
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Contracts\IConfigurationService.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Contracts\IMonzoService.cs" />
+    <Compile Include="Entities\Authentication.cs" />
+    <Compile Include="Services\MonzoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\" />
     <Folder Include="Services\" />
+    <Folder Include="Entities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
