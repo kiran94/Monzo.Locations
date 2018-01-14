@@ -26,6 +26,12 @@ namespace Monzo.Client
                 Console.WriteLine(auth);
             }
 
+            var accounts = service.GetAccounts();
+            foreach(var account in accounts.AccountList)
+            {
+                Console.WriteLine(account.ID);
+            }
+
             Console.ReadLine();
 
         }

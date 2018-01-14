@@ -42,6 +42,8 @@
     <Compile Include="Contracts\IMonzoService.cs" />
     <Compile Include="Entities\Authentication.cs" />
     <Compile Include="Services\MonzoService.cs" />
+    <Compile Include="Entities\Account.cs" />
+    <Compile Include="Entities\Accounts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\" />
