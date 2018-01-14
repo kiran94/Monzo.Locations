@@ -117,10 +117,18 @@
         {
             var transactions = this.GetTransactions(account);
             transactions.TransactionList = transactions.TransactionList
-                .Where(x => x.Merchant != null 
+                .Where(x => x.Merchant != null
                        && !x.Merchant.IsOnline
-                       && x.Merchant.ID != "merch_0000987lak9C9IRzz93Xaj") // temp fix to filter out TFL transactions as they come out as offline transactions. But the Address seems to be thier office.
-                .ToList();
+                       && x.Merchant.ID != "merch_0000987lak9C9IRzz93Xaj"); // temp fix to filter out TFL transactions as they come out as offline transactions. But the Address seems to be thier office.
+
+            return transactions; 
+        }
+
+        /// <inheritdoc />
+        public Transactions GetPhysicalTransactionsByDate(Account account, DateTime start, DateTime end)
+        {
+            var transactions = this.GetPhysicalTransactions(account);
+            transactions.TransactionList = transactions.TransactionList.Where(x => x.Created >= start && x.Created <= end);
             return transactions; 
         }
     }

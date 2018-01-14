@@ -35,9 +35,9 @@
 
 
             Console.WriteLine("ID\tName\tCreated\tLatitude\tLongitude\t");
-            var transactions = service.GetPhysicalTransactions(accounts.AccountList.ElementAt(1)); 
+            var transactions = service.GetPhysicalTransactionsByDate(accounts.AccountList.ElementAt(0), new DateTime(2017, 12, 22), new DateTime(2018, 01, 03)); 
 
-            foreach(var t in transactions.TransactionList)
+            foreach(var t in transactions.TransactionList.OrderBy(x => x.Created))
             {
                 Console.Write(t.ID + "\t" + t.Merchant.Name + "\t" + t.Created); 
                 if (t.Merchant != null)
