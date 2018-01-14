@@ -1,7 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monzo.Locations", "Monzo.Locations\Monzo.Locations.csproj", "{C30B6104-110E-4F8A-92E8-779375789CC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monzo.Locations.Framework", "Monzo.Locations.Framework\Monzo.Locations.Framework.csproj", "{B8BB8519-DADE-44B5-81DA-8B0DCA47D37E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monzo.Client", "Monzo.Client\Monzo.Client.csproj", "{671022C3-97D5-45AF-91B3-112122F8BE34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,9 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C30B6104-110E-4F8A-92E8-779375789CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C30B6104-110E-4F8A-92E8-779375789CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C30B6104-110E-4F8A-92E8-779375789CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C30B6104-110E-4F8A-92E8-779375789CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8BB8519-DADE-44B5-81DA-8B0DCA47D37E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8BB8519-DADE-44B5-81DA-8B0DCA47D37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8BB8519-DADE-44B5-81DA-8B0DCA47D37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8BB8519-DADE-44B5-81DA-8B0DCA47D37E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{671022C3-97D5-45AF-91B3-112122F8BE34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671022C3-97D5-45AF-91B3-112122F8BE34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671022C3-97D5-45AF-91B3-112122F8BE34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671022C3-97D5-45AF-91B3-112122F8BE34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
