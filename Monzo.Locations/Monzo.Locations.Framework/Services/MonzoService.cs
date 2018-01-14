@@ -1,6 +1,7 @@
 ﻿namespace Monzo.Locations.Framework.Services
 {
     using System;
+    using System.Linq; 
     using System.Collections.Generic;
     using Monzo.Locations.Framework.Contracts;
     using Monzo.Locations.Framework.Entities;
@@ -109,6 +110,14 @@
             getJsonTask.Wait();
 
             return JsonConvert.DeserializeObject<Transactions>(getJsonTask.Result); 
+        }
+
+        /// <inheritdoc />
+        public Transactions GetPhysicalTransactions(Account account)
+        {
+            var transactions = this.GetTransactions(account);
+            transactions.TransactionList = transactions.TransactionList.Where(x => !x.IsOnline).ToList();
+            return transactions; 
         }
     }
 }

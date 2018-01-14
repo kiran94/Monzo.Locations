@@ -24,5 +24,12 @@
         /// </summary>
         /// <returns>The transactions.</returns>
         Transactions GetTransactions(Account account);
+
+        /// <summary>
+        /// Gets all the non-online transactions for a specific account. 
+        /// </summary>
+        /// <returns>The physical transactions.</returns>
+        /// <param name="account">Account.</param>
+        Transactions GetPhysicalTransactions(Account account);
     }
 }

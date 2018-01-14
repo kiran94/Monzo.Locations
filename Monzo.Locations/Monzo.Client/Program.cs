@@ -32,11 +32,20 @@
                 Console.WriteLine(account.ID);
             }
 
-            var transactions = service.GetTransactions(accounts.AccountList.First()); 
+            var transactions = service.GetPhysicalTransactions(accounts.AccountList.First()); 
 
             foreach(var t in transactions.TransactionList)
             {
-                Console.WriteLine(t.ID);
+                Console.Write(t.ID + "\t" + t.IsOnline); 
+                if (t.Merchant != null)
+                {
+                    if (t.Merchant.Address != null)
+                    {
+                        Console.Write("\t" + t.Merchant.Address.Latitude + "\t" + t.Merchant.Address.longitude);
+                    }
+                }
+
+                Console.WriteLine(string.Empty);
             }
 
             Console.ReadLine();
