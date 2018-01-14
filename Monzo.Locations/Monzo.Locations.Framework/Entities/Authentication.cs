@@ -8,11 +8,11 @@
     public class Authentication
     {
         /// <summary>
-        /// Gets or sets wheather the user is authenticated. 
+        /// Gets or sets if the user is authenticated. 
         /// </summary>
         /// <value>The authenticated.</value>
         [JsonProperty("authenticated")]
-        public string Authenticated { get; set; }
+        public bool Authenticated { get; set; }
 
         /// <summary>
         /// Gets or sets the client id. 
