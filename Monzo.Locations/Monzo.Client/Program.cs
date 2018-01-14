@@ -20,11 +20,15 @@ namespace Monzo.Client
 
         public static async System.Threading.Tasks.Task<string> test()
         {
+            ConfigurationService configService = new ConfigurationService(); 
+            var accesstoken = configService.GetEnviroment("MONZO"); 
+          
+            Console.WriteLine(accesstoken);
             Dictionary<string, string> headers = new Dictionary<string, string>()
             {
                 {
                     "Authorization",
-                    ""
+                    "Bearer " + accesstoken
                 }
             }; 
 
