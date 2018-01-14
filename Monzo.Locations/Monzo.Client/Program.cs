@@ -6,12 +6,19 @@
 
     public class MainClass
     {
+        /// <summary>
+        /// The name of the enviroment variable for access token.
+        /// </summary>
+        private static string EnviromentVariableAccessTokenName = "MONZO";
+
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
             var httpService = new HttpService();
             var configService = new ConfigurationService();
-            var service = new MonzoService(httpService, configService);
+            var accesstoken = configService.GetEnviroment(EnviromentVariableAccessTokenName);
+                      
+            var service = new MonzoService(httpService, accesstoken);
 
             var auth = service.GetAuthentication(); 
 

@@ -14,44 +14,35 @@
         /// The http service.
         /// </summary>
         private readonly IHttpService httpService;
-
+                       
         /// <summary>
-        /// The config service.
+        /// The access token.
         /// </summary>
-        private readonly IConfigurationService configService;
-
-        /// <summary>
-        /// The name of the enviroment variable for access token.
-        /// </summary>
-        private const string EnviromentVariableAccessTokenName = "MONZO"; 
+        private readonly string AccessToken; 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Monzo.Locations.Framework.Services.MonzoService"/> class.
         /// </summary>
         /// <param name="httpService">Http service.</param>
-        /// <param name="configService">Config service.</param>
-        public MonzoService(IHttpService httpService, IConfigurationService configService)
+        public MonzoService(IHttpService httpService, string accessToken)
         {
             this.httpService = httpService;
-            this.configService = configService; 
+            this.AccessToken = accessToken; 
         }
 
         /// <inheritdoc />
         public Authentication GetAuthentication()
         {
-           
-            var accesstoken = this.configService.GetEnviroment(EnviromentVariableAccessTokenName);
-
-            if (string.IsNullOrEmpty(accesstoken))
+            if (string.IsNullOrEmpty(this.AccessToken))
             {
-                throw new ArgumentException($"Ensure {EnviromentVariableAccessTokenName} env variable is set."); 
+                throw new ArgumentException($"Ensure env variable is set."); 
             }
                        
             Dictionary<string, string> headers = new Dictionary<string, string>()
             {
                 {
                     "Authorization",
-                    "Bearer " + accesstoken
+                    "Bearer " + this.AccessToken
                 }
             };
 
@@ -64,19 +55,17 @@
 
         /// <inheritdoc />
         public Accounts GetAccounts()
-        {
-            var accesstoken = this.configService.GetEnviroment(EnviromentVariableAccessTokenName);
-
-            if (string.IsNullOrEmpty(accesstoken))
+        {          
+            if (string.IsNullOrEmpty(this.AccessToken))
             {
-                throw new ArgumentException($"Ensure {EnviromentVariableAccessTokenName} env variable is set."); 
+                throw new ArgumentException($"Ensure env variable is set."); 
             }
                        
             Dictionary<string, string> headers = new Dictionary<string, string>()
             {
                 {
                     "Authorization",
-                    "Bearer " + accesstoken
+                    "Bearer " + this.AccessToken
                 }
             };
 
@@ -89,19 +78,17 @@
 
         /// <inheritdoc />
         public Transactions GetTransactions(Account account)
-        {
-            var accesstoken = this.configService.GetEnviroment(EnviromentVariableAccessTokenName);
-
-            if (string.IsNullOrEmpty(accesstoken))
+        {           
+            if (string.IsNullOrEmpty(this.AccessToken))
             {
-                throw new ArgumentException($"Ensure {EnviromentVariableAccessTokenName} env variable is set."); 
+                throw new ArgumentException($"Ensure {this.AccessToken} env variable is set."); 
             }
                        
             Dictionary<string, string> headers = new Dictionary<string, string>()
             {
                 {
                     "Authorization",
-                    "Bearer " + accesstoken
+                    "Bearer " + this.AccessToken
                 }
             };
 
