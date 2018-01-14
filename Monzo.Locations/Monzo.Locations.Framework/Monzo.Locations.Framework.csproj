@@ -44,6 +44,10 @@
     <Compile Include="Services\MonzoService.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Accounts.cs" />
+    <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\Merchant.cs" />
+    <Compile Include="Entities\Transactions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\" />

@@ -1,6 +1,7 @@
 ﻿namespace Monzo.Client
 {
     using System;
+    using System.Linq; 
     using Monzo.Locations.Framework.Services;
 
     public class MainClass
@@ -29,6 +30,13 @@
             foreach(var account in accounts.AccountList)
             {
                 Console.WriteLine(account.ID);
+            }
+
+            var transactions = service.GetTransactions(accounts.AccountList.First()); 
+
+            foreach(var t in transactions.TransactionList)
+            {
+                Console.WriteLine(t.ID);
             }
 
             Console.ReadLine();

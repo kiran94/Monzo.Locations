@@ -85,5 +85,30 @@
 
             return JsonConvert.DeserializeObject<Accounts>(getJsonTask.Result); 
         }
+
+        /// <inheritdoc />
+        public Transactions GetTransactions(Account account)
+        {
+            var accesstoken = this.configService.GetEnviroment(EnviromentVariableAccessTokenName);
+
+            if (string.IsNullOrEmpty(accesstoken))
+            {
+                throw new ArgumentException($"Ensure {EnviromentVariableAccessTokenName} env variable is set."); 
+            }
+                       
+            Dictionary<string, string> headers = new Dictionary<string, string>()
+            {
+                {
+                    "Authorization",
+                    "Bearer " + accesstoken
+                }
+            };
+
+          
+            var getJsonTask = httpService.GetJson($"https://api.monzo.com/transactions?expand[]=merchant&account_id={account.ID}", headers);
+            getJsonTask.Wait();
+
+            return JsonConvert.DeserializeObject<Transactions>(getJsonTask.Result); 
+        }
     }
 }

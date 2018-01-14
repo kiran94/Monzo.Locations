@@ -13,11 +13,16 @@
         /// <returns>The authentication object.</returns>
         Authentication GetAuthentication();
 
-
         /// <summary>
         /// Gets the Accounts of a User. 
         /// </summary>
         /// <returns>The accounts.</returns>
-        Accounts GetAccounts(); 
+        Accounts GetAccounts();
+
+        /// <summary>
+        /// Gets the transactions for a specific account. 
+        /// </summary>
+        /// <returns>The transactions.</returns>
+        Transactions GetTransactions(Account account);
     }
 }
