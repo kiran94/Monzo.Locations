@@ -116,7 +116,11 @@
         public Transactions GetPhysicalTransactions(Account account)
         {
             var transactions = this.GetTransactions(account);
-            transactions.TransactionList = transactions.TransactionList.Where(x => !x.IsOnline).ToList();
+            transactions.TransactionList = transactions.TransactionList
+                .Where(x => x.Merchant != null 
+                       && !x.Merchant.IsOnline
+                       && x.Merchant.ID != "merch_0000987lak9C9IRzz93Xaj") // temp fix to filter out TFL transactions as they come out as offline transactions. But the Address seems to be thier office.
+                .ToList();
             return transactions; 
         }
     }

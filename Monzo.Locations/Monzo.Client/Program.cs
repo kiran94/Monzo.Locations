@@ -32,11 +32,11 @@
                 Console.WriteLine(account.ID);
             }
 
-            var transactions = service.GetPhysicalTransactions(accounts.AccountList.First()); 
+            var transactions = service.GetPhysicalTransactions(accounts.AccountList.ElementAt(1)); 
 
             foreach(var t in transactions.TransactionList)
             {
-                Console.Write(t.ID + "\t" + t.IsOnline); 
+                Console.Write(t.ID + "\t" + t.Merchant.Name); 
                 if (t.Merchant != null)
                 {
                     if (t.Merchant.Address != null)
