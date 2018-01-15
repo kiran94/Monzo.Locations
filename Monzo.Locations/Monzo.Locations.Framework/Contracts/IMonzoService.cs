@@ -6,7 +6,7 @@
     /// <summary>
     /// Encapsulates logic to interact with the Monzo API. 
     /// </summary>
-    public interface IMonzoService
+    public interface IMonzoService : IDisposable
     {
         /// <summary>
         /// Gets authentication details. 

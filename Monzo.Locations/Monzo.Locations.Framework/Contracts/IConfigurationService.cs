@@ -5,7 +5,7 @@
     /// <summary>
     /// Encapsualtes logic for retrieving configuaration values. 
     /// </summary>
-    public interface IConfigurationService
+    public interface IConfigurationService : IDisposable
     {
         /// <summary>
         /// Gets the value of the passed Enviroment variable.
