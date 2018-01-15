@@ -16,6 +16,11 @@
         private static string EnviromentVariableAccessTokenName = "MONZO";
 
         /// <summary>
+        /// The section break.
+        /// </summary>
+        private static string SectionBreak = new string('-', 12); 
+
+        /// <summary>
         /// The entry point of the program, where the program control starts and ends.
         /// </summary>
         /// <param name="args">The command-line arguments.</param>
@@ -25,6 +30,8 @@
             var configService = new ConfigurationService();
             var service = new MonzoService(httpService, configService.GetEnviroment(EnviromentVariableAccessTokenName));                                 
             var auth = service.GetAuthentication(); 
+
+            WriteLine(SectionBreak); 
 
             if (auth.Authenticated)
             {
@@ -38,6 +45,8 @@
                 throw new UnauthorizedAccessException(auth.ToString()); 
             }
 
+            WriteLine(SectionBreak); 
+
             // Print Detected Acccounts. 
             WriteLine("ID\tDesciption\t");
             var accounts = service.GetAccounts();
@@ -45,6 +54,8 @@
             {
                 WriteLine(account.ID + "\t" + account.Description);
             }
+
+            WriteLine(SectionBreak); 
 
             // Print Physical Transactions by Date.
             WriteLine("ID\tName\tCreated\tLatitude\tLongitude\t");
