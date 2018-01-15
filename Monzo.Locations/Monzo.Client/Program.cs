@@ -3,7 +3,11 @@
     using System;
     using System.Linq; 
     using Monzo.Locations.Framework.Services;
+    using static System.Console; 
 
+    /// <summary>
+    /// Main class.
+    /// </summary>
     public class MainClass
     {
         /// <summary>
@@ -11,55 +15,49 @@
         /// </summary>
         private static string EnviromentVariableAccessTokenName = "MONZO";
 
+        /// <summary>
+        /// The entry point of the program, where the program control starts and ends.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             var httpService = new HttpService();
             var configService = new ConfigurationService();
-            var accesstoken = configService.GetEnviroment(EnviromentVariableAccessTokenName);
-                      
-            var service = new MonzoService(httpService, accesstoken);
-
+            var service = new MonzoService(httpService, configService.GetEnviroment(EnviromentVariableAccessTokenName));                                 
             var auth = service.GetAuthentication(); 
 
             if (auth.Authenticated)
             {
-                Console.ForegroundColor = ConsoleColor.Green; 
-                Console.WriteLine(auth);
+                ForegroundColor = ConsoleColor.Green; 
+                WriteLine(auth);
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(auth);
+                ForegroundColor = ConsoleColor.Red;
+                WriteLine(auth);
+                throw new UnauthorizedAccessException(auth.ToString()); 
             }
 
-            Console.WriteLine("ID\tDesciption\t");
+            // Print Detected Acccounts. 
+            WriteLine("ID\tDesciption\t");
             var accounts = service.GetAccounts();
             foreach(var account in accounts.AccountList)
             {
-                Console.WriteLine(account.ID + "\t" + account.Description);
+                WriteLine(account.ID + "\t" + account.Description);
             }
 
+            // Print Physical Transactions by Date.
+            WriteLine("ID\tName\tCreated\tLatitude\tLongitude\t");
 
-            Console.WriteLine("ID\tName\tCreated\tLatitude\tLongitude\t");
-            var transactions = service.GetPhysicalTransactionsByDate(accounts.AccountList.ElementAt(0), new DateTime(2017, 12, 22), new DateTime(2018, 01, 03)); 
+            var transactions = service.GetPhysicalTransactionsByDate(accounts.AccountList.ElementAt(0), new DateTime(2017, 12, 22), new DateTime(2018, 01, 03));
+            transactions.TransactionList = transactions.TransactionList.Where(x => x.Merchant != null && x.Merchant.Address != null); 
 
             foreach(var t in transactions.TransactionList.OrderBy(x => x.Created))
             {
-                Console.Write(t.ID + "\t" + t.Merchant.Name + "\t" + t.Created); 
-                if (t.Merchant != null)
-                {
-                    if (t.Merchant.Address != null)
-                    {
-                        Console.Write("\t" + t.Merchant.Address.Latitude + "\t" + t.Merchant.Address.longitude);
-                    }
-                }
-
-                Console.WriteLine(string.Empty);
+                WriteLine(t.ID + "\t" + t.Merchant.Name + "\t" + t.Created + "\t" + t.Merchant.Address.Latitude + "\t" + t.Merchant.Address.longitude); 
             }
 
-            Console.ReadLine();
-
+            ReadKey();
         }
     }
 }
