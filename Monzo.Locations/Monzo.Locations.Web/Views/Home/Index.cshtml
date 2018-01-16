@@ -1,0 +1,35 @@
+﻿
+<header>
+
+    <div class="row" id='headerbackground'>
+        <div class="col-sm-2">
+             <img alt="MonzoLogo" src="https://monzo.com/static/images/mondo-mark-01.png" class="img-responsive" id='logo'/>
+        </div>
+
+         <div class="col-sm-8">
+              <h1 id="headertitle" >Monzo.Locations</h1>
+        </div>
+
+         <div class="col-sm-2">
+
+               @if(@ViewData["authenticated"] == "Authenticated")
+                {
+                      <p id='auth' class='authorised'>@ViewData["authenticated"]</p>
+                }
+            else
+            {
+                     <p id='auth' class=''>@ViewData["authenticated"]</p>
+            }
+
+            
+
+        </div>
+    </div>
+   
+
+
+  
+</header>
+
+
+

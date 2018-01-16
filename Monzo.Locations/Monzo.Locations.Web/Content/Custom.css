@@ -1,0 +1,33 @@
+﻿body {
+}
+
+.debug
+{
+    border: 1px solid red; 
+}
+
+#headerbackground 
+{
+    background: #14243C
+}
+
+#headertitle {
+    color: white
+
+}
+
+.authorised
+{
+    color: green; 
+}
+
+.notauthorised
+{
+    color: red; 
+}
+
+/*#logo
+{
+    width: 70%; 
+    height: 70%; 
+}*/7
