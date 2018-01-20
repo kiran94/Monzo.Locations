@@ -7,6 +7,7 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Mvc.Ajax;
+    using Monzo.Locations.Framework.Entities;
     using Monzo.Locations.Framework.Services;
     using Newtonsoft.Json;
 
@@ -74,11 +75,18 @@
                 if (account == null || account.AccountList == null || account.AccountList.Count == 0)
                 {
                     throw new MissingMemberException("No Accounts found");                     
-                } 
+                }
 
-                var latestAccount = account.AccountList.Last();
-                var transactions = service.GetPhysicalTransactionsByDate(latestAccount, parsedStart, parsedEnd);
-                return JsonConvert.SerializeObject(transactions);          
+                Transactions returnedTransactions = new Transactions() { TransactionList = new List<Transaction>() }; 
+
+                foreach(Account currentAccount in account.AccountList)
+                {
+                    var currentTransactions = service.GetPhysicalTransactionsByDate(currentAccount, parsedStart, parsedEnd).TransactionList;
+
+                    returnedTransactions.TransactionList = returnedTransactions.TransactionList.Union(currentTransactions);
+                }
+                               
+                return JsonConvert.SerializeObject(returnedTransactions);          
             }
         }
     }
