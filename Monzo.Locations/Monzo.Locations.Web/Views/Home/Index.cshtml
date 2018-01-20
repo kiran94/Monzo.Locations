@@ -20,3 +20,17 @@
         </div>
     </div>
 </header>
+
+<section>
+    @if(@ViewData["authenticated"] == "Authenticated")
+    {
+        <div id='map'></div>
+    }
+    else
+    {
+        <p>Please authorise with an access token</p>
+    }          
+</section>
+
+<script type='text/javascript' src="~/Scripts/maps.js"></script>
+<script type='text/javascript' src=@String.Format("https://maps.googleapis.com/maps/api/js?key={0}&callback=initMap", ViewData["googlemapskey"])></script>

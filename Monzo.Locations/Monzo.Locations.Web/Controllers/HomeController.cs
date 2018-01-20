@@ -19,6 +19,11 @@
         private string EnviromentVariableAccessTokenName = "MONZO";
 
         /// <summary>
+        /// The name of the enviroment variable google maps key.
+        /// </summary>
+        private string EnviromentVariableGoogleMapsKey = "GOOGLEAPI"; 
+
+        /// <summary>
         /// Home Page.
         /// </summary>
         /// <returns>The index.</returns>
@@ -30,7 +35,8 @@
             using (var service = new MonzoService(httpService, configService.GetEnviroment(EnviromentVariableAccessTokenName)))
             {
                 var auth = service.GetAuthentication();
-                ViewData["authenticated"] = auth.Authenticated ? "Authenticated" : "Not Authenticated";  
+                ViewData["authenticated"] = auth.Authenticated ? "Authenticated" : "Not Authenticated";
+                ViewData["googlemapskey"] = configService.GetEnviroment(EnviromentVariableGoogleMapsKey); 
             }
 
             return View(); 

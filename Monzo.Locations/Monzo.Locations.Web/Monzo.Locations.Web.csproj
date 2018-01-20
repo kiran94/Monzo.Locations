@@ -82,6 +82,7 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Content\Custom.css" />
+    <Content Include="Scripts\maps.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Monzo.Locations.Framework\Monzo.Locations.Framework.csproj">
