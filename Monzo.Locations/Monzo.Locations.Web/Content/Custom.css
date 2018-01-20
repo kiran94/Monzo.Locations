@@ -1,7 +1,4 @@
-﻿body {
-}
-
-.debug
+﻿.debug
 {
     border: 1px solid red; 
 }
@@ -56,13 +53,11 @@
 
 #options {
     padding: 1em;
-    background-color: #14243C; 
-    color: white; 
+    background-color: #14243C;  
 }
 
-#options.input
-{
-    padding-left: 10;
+.inputoption {
+   color: white; 
 }
 
 #retrievebutton
@@ -73,4 +68,3 @@
 #footer
 {
     text-align: right; 
-}
