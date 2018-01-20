@@ -12,22 +12,34 @@
 }
 
 #headertitle {
-    color: white
+    color: white;
 
 }
 
-.authorised
+#auth
 {
-    color: green; 
+    font-size: 1.5em; 
+    vertical-align: text-bottom; 
 }
 
-.notauthorised
-{
-    color: red; 
+.authorised {
+    color: white;
+    border: 1px solid #14243C;
+    background-color: green; 
+    text-align: center; 
 }
 
-/*#logo
-{
-    width: 70%; 
-    height: 70%; 
-}*/7
+.notauthorised {
+    color: white;
+    border: 1px solid #14243C;
+    background-color: red;
+    text-align: center;
+
+}
+
+#logo {
+    width: 70%;
+    height: 70%;
+    padding-left: 1em;
+    padding-top: 1em;
+}

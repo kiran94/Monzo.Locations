@@ -1,35 +1,22 @@
-﻿
-<header>
-
+﻿<header>
     <div class="row" id='headerbackground'>
-        <div class="col-sm-2">
+        <div class="col-xs-1">
              <img alt="MonzoLogo" src="https://monzo.com/static/images/mondo-mark-01.png" class="img-responsive" id='logo'/>
         </div>
 
-         <div class="col-sm-8">
-              <h1 id="headertitle" >Monzo.Locations</h1>
+         <div class="col-xs-9">
+              <h1 id="headertitle">Monzo.Locations</h1>
         </div>
 
-         <div class="col-sm-2">
-
-               @if(@ViewData["authenticated"] == "Authenticated")
-                {
-                      <p id='auth' class='authorised'>@ViewData["authenticated"]</p>
-                }
+         <div class="col-xs-2">
+           @if(@ViewData["authenticated"] == "Authenticated")
+            {
+                  <p id='auth' class='authorised'>@ViewData["authenticated"]</p>
+            }
             else
             {
-                     <p id='auth' class=''>@ViewData["authenticated"]</p>
-            }
-
-            
-
+                  <p id='auth' class='notauthorised'>@ViewData["authenticated"]</p>
+            }                       
         </div>
     </div>
-   
-
-
-  
 </header>
-
-
-
