@@ -47,9 +47,30 @@
 /* Google Maps */
 #map {
     display: block;
-    height: 500px;
+    height: 600px;
     width: 100%;
     padding: 0;
     margin: 0
 
+}
+
+#options {
+    padding: 1em;
+    background-color: #14243C; 
+    color: white; 
+}
+
+#options.input
+{
+    padding-left: 10;
+}
+
+#retrievebutton
+{
+    color: black; 
+}
+
+#footer
+{
+    text-align: right; 
 }

@@ -11,26 +11,46 @@
          <div class="col-xs-2">
            @if(@ViewData["authenticated"] == "Authenticated")
             {
-                  <p id='auth' class='authorised'>@ViewData["authenticated"]</p>
+                <p id='auth' class='authorised'>@ViewData["authenticated"]</p>
             }
             else
             {
-                  <p id='auth' class='notauthorised'>@ViewData["authenticated"]</p>
+                <p id='auth' class='notauthorised'>@ViewData["authenticated"]</p>
             }                       
         </div>
     </div>
 </header>
 
-<section>
+<section class="row">
     @if(@ViewData["authenticated"] == "Authenticated")
     {
-        <div id='map'></div>
+        <div id='map' class="col-xs-12"></div>
     }
     else
     {
         <p>Please authorise with an access token</p>
-    }          
+    }
 </section>
+
+<section class="row" id='options'>
+    <div class='col-xs-2'></div>
+    
+    <div class='col-xs-3'>
+        Start Date <input type='text' id='startdate' />       
+    </div>
+      <div class='col-xs-3'>     
+        End Date <input type='text' id='enddate' />
+    </div>
+     <div class='col-xs-3'>
+        <button type="button" class="btn btn-light" id='retrievebutton'>Retrieve</button>
+    </div>
+    
+     <div class='col-xs-1'></div>
+</section>
+
+<footer id='footer'>
+    Monzo.Locations &copy 2017
+</footer>
 
 <script type='text/javascript' src="~/Scripts/maps.js"></script>
 <script type='text/javascript' src=@String.Format("https://maps.googleapis.com/maps/api/js?key={0}&callback=initMap", ViewData["googlemapskey"])></script>
