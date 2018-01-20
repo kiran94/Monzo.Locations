@@ -1,5 +1,6 @@
 ﻿namespace Monzo.Locations.Framework.Entities
 {
+    using System;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -20,5 +21,12 @@
         /// <value>The description.</value>
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created date. 
+        /// </summary>
+        /// <value>The created.</value>
+        [JsonProperty("created")]
+        public DateTime Created { get; set; } 
     }
 }
