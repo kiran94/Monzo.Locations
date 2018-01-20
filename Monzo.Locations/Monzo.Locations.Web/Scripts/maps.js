@@ -3,6 +3,11 @@ var map;
 
 var defaultLocation = {lat: 51.513413, lng: -0.088961}; 
 
+/*
+  Array of Markers added to the map
+*/
+var markers = []; 
+
 /* Initialises the map instance */
 function initMap()
 {
@@ -33,8 +38,7 @@ function addMarker(location, title)
 		  infowindow.text(newMarker.info);
     });
 
-    //markers.push(newMarker); 
-    //addLegendItem(clusterNo, pinColor);
+    markers.push(newMarker);    
 }
 
 /*
@@ -51,11 +55,32 @@ function GeneratePolyline(polygonCoords)
         });
 }
 
+
+/*
+  Removes all markers from the map
+*/
+function clearMarkers()
+{
+  markers = []; 
+
+  if(markers)
+  {
+    for(var i=0; i<markers.length; i++)
+    {
+      markers[i].setMap(null); 
+    }
+    markers.length = 0; 
+  }
+}
+
 /* Initialises the map instance */
 $(function()
 {    
     $('#retrievebutton').click(function()
     {
+        $('#retrievebutton').prop('disabled', true);
+        clearMarkers();
+
         var bound = new google.maps.LatLngBounds(); 
         var polygonCoords = [];
         var startdate = $('#startdate').val(); 
@@ -88,10 +113,12 @@ $(function()
             error: function(err)
             {
                 alert(err); 
+                console.log(err); 
             }, 
             dataType: 'json'
         });
-//http://127.0.0.1:8080/Home/GetTransactions?startDate=20180101&endDate=20180110
+
+        $('#retrievebutton').prop('disabled', false);
     }); 
 }); 
 
