@@ -30,5 +30,10 @@ Then all you need to do is enter the range in which you want to see transactions
 ### Local Example
 ![LocalExample](Images/LocalExample.png)
 
+### Transaction Table Example
+Once you have some transactions loaded, you can scroll down to view more detailed information about them. 
+
+![Transaction Table example](Images/TransactionTableExample.png)
+
 
 *This project has no affiliation with Monzo themselves. I am merely a sole developer making use of the API that they provide.*
