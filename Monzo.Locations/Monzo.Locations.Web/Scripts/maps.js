@@ -82,10 +82,13 @@ function clearMarkers()
 
 /* Initialises the map instance */
 $(function()
-{    
-    $('#retrievebutton').click(function()
-    {
-        $('#retrievebutton').prop('disabled', true);
+{   
+    var retrieveButton = $('#retrievebutton'); 
+
+    retrieveButton.click(function()
+    {       
+        retrieveButton.html("Loading..."); 
+        retrieveButton.prop('disabled', true);
         clearMarkers();
 
         var bound = new google.maps.LatLngBounds(); 
@@ -115,14 +118,16 @@ $(function()
                 map.setCenter(bound.getCenter()); 
 			    map.fitBounds(bound); 
 
-                $('#retrievebutton').prop('disabled', false);
+                retrieveButton.prop('disabled', false);               
+                retrieveButton.html("Retrieve"); 
 
             },
             error: function(err)
             {
                 alert(err); 
                 console.log(err);                 
-                $('#retrievebutton').prop('disabled', false);
+                retrieveButton.prop('disabled', false);               
+                retrieveButton.html("Retrieve"); 
             }, 
             dataType: 'json'
         });
