@@ -1,17 +1,13 @@
-﻿/* Google Maps Variable*/
+﻿/* Google Maps Object */
 var map;
 
 /* Default location to set the map. */
 var defaultLocation = { lat: 51.513413, lng: -0.088961 };
 
-/*
-    Array of Markers added to the map
-*/
+/* Array of Markers added to the map */
 var markers = [];
 
-/*
-    Polygon drawn on the screen.
-*/
+/* Polygon drawn on the screen. */
 var polygon;
 
 /* Date Regular Expression */
@@ -125,11 +121,14 @@ $(function () {
         `;
 
         $.each(transactions, function (index, value) {
+
+            var createdSplit = value.created.split('T')
+
             var currentRow =
                 `<tr>
                 <td>` + value.merchant.name + `</td>
                 <td>` + Math.abs(value.amount / 100) + `</td>
-                <td>` + value.created + `</td>
+                <td>` + createdSplit[0] + " " + createdSplit[1] + `</td>
                 <td>` + value.merchant.address.Latitude + `</td>
                 <td>` + value.merchant.address.longitude + `</td>
             </tr>`
@@ -166,37 +165,37 @@ $(function () {
         }
 
         $.ajax(
-            {
-                url: 'http://127.0.0.1:8080/Home/GetTransactions',
-                data: { startDate: startdate, endDate: enddate },
-                success: function (data, status, xhr) {
-                    $.each(data.transactions, function (index, value) {
-                        var address = value.merchant.address;
-                        var currentLocation = new google.maps.LatLng(address.Latitude, address.longitude);
+        {
+            url: 'http://127.0.0.1:8080/Home/GetTransactions',
+            data: { startDate: startdate, endDate: enddate },
+            dataType: 'json',
+            success: function (data, status, xhr) {
+                $.each(data.transactions, function (index, value) {
+                    var address = value.merchant.address;
+                    var currentLocation = new google.maps.LatLng(address.Latitude, address.longitude);
 
-                        addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")")
+                    addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")")
 
-                        polygonCoords.push(currentLocation);
-                        bound.extend(currentLocation);
-                    })
+                    polygonCoords.push(currentLocation);
+                    bound.extend(currentLocation);
+                })
 
-                    polygon = GeneratePolyline(polygonCoords);
-                    polygon.setMap(map);
+                polygon = GeneratePolyline(polygonCoords);
+                polygon.setMap(map);
 
-                    map.setCenter(bound.getCenter());
-                    map.fitBounds(bound);
+                map.setCenter(bound.getCenter());
+                map.fitBounds(bound);
 
-                    resetButton();
-                    setResultInfo("Retrieved " + data.transactions.length + " Transactions", "green");
+                resetButton();
+                setResultInfo("Retrieved " + data.transactions.length + " Transactions", "green");
 
-                    generateTable(data.transactions);
-                },
-                error: function (err, status, message) {
-                    console.log(message);
-                    resetButton();
-                    setResultInfo(message, "red");
-                },
-                dataType: 'json'
-            });
+                generateTable(data.transactions);
+            },
+            error: function (err, status, message) {
+                console.log(message);
+                resetButton();
+                setResultInfo(message, "red");
+            }
+        });
     });
 }); 
