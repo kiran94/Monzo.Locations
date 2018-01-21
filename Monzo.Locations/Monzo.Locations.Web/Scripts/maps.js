@@ -91,6 +91,7 @@ $(function()
     var resultInfo = $('#resultinfo'); 
     var startDate = $('#startdate'); 
     var endDate = $('#enddate'); 
+    var table = $('#transactiontable'); 
 
     /* Disables the button */
     function disableButton()
@@ -116,6 +117,44 @@ $(function()
         {
             resultInfo.html(""); 
         }); 
+    }
+
+    /*  
+        Generates the table of transactions. 
+    */
+    function generateTable(transactions)
+    {
+        var allrows = 
+        `
+            <thead>
+            <tr>
+                <th>Merchant</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+            </thead>
+            <tbody>
+        `; 
+
+        $.each(transactions, function(index, value)
+        {
+            var currentRow = 
+            `<tr>
+                <td>` + value.merchant.name +`</td>
+                <td>` + Math.abs(value.amount/100) +`</td>
+                <td>` + value.created +`</td>
+                <td>` + value.merchant.address.Latitude +`</td>
+                <td>` + value.merchant.address.longitude +`</td>
+            </tr>`
+
+            allrows += currentRow; 
+        }); 
+
+        allrows += "</tbody>"
+
+        table.html(allrows); 
     }
 
     /* When the retrieve button is clicked, make an AJAX call to the server to load the transactions. */
@@ -163,12 +202,14 @@ $(function()
 
                 polygon = GeneratePolyline(polygonCoords); 
                 polygon.setMap(map);
-                
+
                 map.setCenter(bound.getCenter()); 
 			    map.fitBounds(bound); 
 
                 resetButton(); 
-                setResultInfo("Retrieved " + data.transactions.length + " Transactions", "green");                
+                setResultInfo("Retrieved " + data.transactions.length + " Transactions", "green");  
+                
+                generateTable(data.transactions); 
             },
             error: function(err, status, message)
             {                
