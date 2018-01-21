@@ -16,14 +16,14 @@ You can get your Monzo Access Token from [here](https://developers.monzo.com/) a
 
 *Currently the project only supports access token authentication for the monzo API. This is because I was having some difficulty setting up the authentication with the OAUTH2 service since I do not have anywhere to host the redirect url.*
 
-3. Launch the the `Monzo.Locations.Web` application. If you are launching from Visual Studio on Mac then please take into account this [issue](https://www.placona.co.uk/1592/dotnet/osx-pro-tip-for-environment-variables/). 
+3. Launch the `Monzo.Locations.Web` application. If you are launching from Visual Studio on Mac then please take into account this [issue](https://www.placona.co.uk/1592/dotnet/osx-pro-tip-for-environment-variables/). 
 
 ## Examples
-If all is well then you should see the following landing screen. *Notice the Authenticated sign on the top right corner.* Please note that the application will filter out any transactions marked as 'online' as I only want to see physical transactions. 
+If all is well then you should see the following landing screen. *Notice the Authenticated sign on the top right corner.* 
 
 ![Landing](Images/LANDING.png)
 
-Then all you need to do is enter the range in which you want to see transactions and click `Retrieve`.
+Then all you need to do is enter the range in which you want to see transactions and click `Retrieve`. Please note that the application will filter out any transactions marked as 'online' as I only want to see physical transactions. 
 
 ### Global Example
 ![GlobalExample](Images/GlobalExample.png)
@@ -36,9 +36,4 @@ Once you have some transactions loaded, you can scroll down to view more detaile
 
 ![Transaction Table example](Images/TransactionTable.png)
 
-
 *This project has no affiliation with Monzo themselves. I am merely a sole developer making use of the API that they provide.*
-
-
-
-
