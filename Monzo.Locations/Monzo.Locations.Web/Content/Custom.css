@@ -65,6 +65,11 @@
     color: black; 
 }
 
+#resultinfo
+{
+    color: white; 
+}
+
 #footer
 {
     text-align: right; 

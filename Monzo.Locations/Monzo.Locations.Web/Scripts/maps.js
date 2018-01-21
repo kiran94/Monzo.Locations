@@ -80,16 +80,18 @@ function clearMarkers()
     }    
 }
 
-/* Initialises the map instance */
+/* Run after document load. */
 $(function()
 {   
     var retrieveButton = $('#retrievebutton'); 
+    var resultInfo = $('#resultinfo'); 
 
     retrieveButton.click(function()
     {       
         retrieveButton.html("Loading..."); 
         retrieveButton.prop('disabled', true);
         clearMarkers();
+        resultInfo.fadeIn(); 
 
         var bound = new google.maps.LatLngBounds(); 
         var polygonCoords = [];
@@ -120,7 +122,12 @@ $(function()
 
                 retrieveButton.prop('disabled', false);               
                 retrieveButton.html("Retrieve"); 
+                resultInfo.html("Retrieved " + data.transactions.length + " Transactions"); 
 
+                resultInfo.fadeOut(3000, function()
+                {
+                    resultInfo.html(""); 
+                });  
             },
             error: function(err)
             {
