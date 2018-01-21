@@ -137,7 +137,7 @@ $(function () {
                 allrows += 
                 `
                     <tr>
-                        <td><b>` + currentMonth +`</b></td>
+                        <td><h3><b>` + currentMonth +`</b></h3></td>
                         <td></td>
                         <td></td>
                         <td></td>
