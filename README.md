@@ -1,8 +1,8 @@
 # Monzo.Locations 🚀 ![cibadge](https://ci.appveyor.com/api/projects/status/2k111gualyuq821n?svg=true)
 
-Monzo.Locations is a application based on the [Monzo API](https://monzo.com/docs/) to provide visualizations on transactional data. 
+Monzo.Locations is an application based on the [Monzo API](https://monzo.com/docs/) to provide visualisations on transactional data. 
 
-## Setup
+## Setup 
 
 1. Clone the Repository
 2. Set up the Environment Variables
@@ -25,3 +25,6 @@ If all is well then you should see the following landing screen. *Notice the Aut
 Then all you need to do is enter the range in which you want to see transactions and click `Retrieve`.
 
 ![Example](EXAMPLE.png)
+
+
+*This project has no affiliation with Monzo themselves. I am merely a sole developer making use of the API that they provide.*
