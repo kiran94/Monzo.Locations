@@ -4,9 +4,14 @@ var map;
 var defaultLocation = {lat: 51.513413, lng: -0.088961}; 
 
 /*
-  Array of Markers added to the map
+    Array of Markers added to the map
 */
 var markers = []; 
+
+/*
+    Polygon drawn on the screen.
+*/
+var polygon; 
 
 /* Initialises the map instance */
 function initMap()
@@ -56,21 +61,23 @@ function GeneratePolyline(polygonCoords)
 }
 
 
-/*
-  Removes all markers from the map
-*/
+/* Clears the markers and polygon currently on the map */
 function clearMarkers()
 {
-  markers = []; 
-
-  if(markers)
-  {
-    for(var i=0; i<markers.length; i++)
+	if (markers)
+	{
+		for (var i = 0; i < markers.length; i++)
+		{
+			markers[i].setMap(null); 
+        }
+        
+        markers = [];
+	}
+   
+    if (polygon)
     {
-      markers[i].setMap(null); 
-    }
-    markers.length = 0; 
-  }
+        polygon.setMap(null);
+    }    
 }
 
 /* Initialises the map instance */
@@ -97,13 +104,13 @@ $(function()
                     var address = value.merchant.address; 
                     var currentLocation = new google.maps.LatLng(address.Latitude, address.longitude); 
 
-                    addMarker(currentLocation, value.merchant.name + "(" + value.created + ")")
+                    addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")")
 
                     polygonCoords.push(currentLocation); 
                     bound.extend(currentLocation); 
                 })
 
-                var polygon = GeneratePolyline(polygonCoords); 
+                polygon = GeneratePolyline(polygonCoords); 
                 polygon.setMap(map); 
                 map.setCenter(bound.getCenter()); 
 			    map.fitBounds(bound); 
