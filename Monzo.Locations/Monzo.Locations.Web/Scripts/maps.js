@@ -92,6 +92,13 @@ $(function()
     var startDate = $('#startdate'); 
     var endDate = $('#enddate'); 
 
+    /* Disables the button */
+    function disableButton()
+    {
+        retrieveButton.html("Loading..."); 
+        retrieveButton.prop('disabled', true);
+    }
+
     /* Reset the button to default. */
     function resetButton()
     {      
@@ -114,8 +121,7 @@ $(function()
     /* When the retrieve button is clicked, make an AJAX call to the server to load the transactions. */
     retrieveButton.click(function()
     {       
-        retrieveButton.html("Loading..."); 
-        retrieveButton.prop('disabled', true);
+        disableButton(); 
         clearMarkers();
         resultInfo.fadeIn(); 
 
@@ -156,12 +162,12 @@ $(function()
                 })
 
                 polygon = GeneratePolyline(polygonCoords); 
-                polygon.setMap(map); 
+                polygon.setMap(map);
+                
                 map.setCenter(bound.getCenter()); 
 			    map.fitBounds(bound); 
 
-                retrieveButton.prop('disabled', false);               
-                retrieveButton.html("Retrieve"); 
+                resetButton(); 
                 setResultInfo("Retrieved " + data.transactions.length + " Transactions", "green");                
             },
             error: function(err, status, message)
