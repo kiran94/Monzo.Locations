@@ -108,6 +108,9 @@ $(function () {
         Generates the table of transactions. 
     */
     function generateTable(transactions) {
+
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
         var allrows =
             `
             <thead>
@@ -122,18 +125,35 @@ $(function () {
             <tbody>
         `;
 
+        var previousMonth = ""; 
         $.each(transactions, function (index, value) {
-
-            var createdSplit = value.created.split('T')
-
+            
+            var currentDate = new Date(value.created);
+            var currentMonth = monthNames[currentDate.getMonth()]; 
+            
+            if (currentMonth != previousMonth)
+            {
+                previousMonth = currentMonth; 
+                allrows += 
+                `
+                    <tr>
+                        <td><b>` + currentMonth +`</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                `;
+            }
+            
             var currentRow =
                 `<tr>
-                <td>` + value.merchant.name + `</td>
-                <td>` + Math.abs(value.amount / 100) + `</td>
-                <td>` + createdSplit[0] + " " + createdSplit[1] + `</td>
-                <td>` + value.merchant.address.Latitude + `</td>
-                <td>` + value.merchant.address.longitude + `</td>
-            </tr>`
+                    <td>` + value.merchant.name.substr(0, 30) + `</td>
+                    <td>` + Math.abs(value.amount / 100) + `</td>
+                    <td>` + currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + + currentDate.getSeconds() + `</td>
+                    <td>` + value.merchant.address.Latitude + `</td>
+                    <td>` + value.merchant.address.longitude + `</td>
+                </tr>`
 
             allrows += currentRow;
         });
