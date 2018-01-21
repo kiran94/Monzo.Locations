@@ -1,6 +1,7 @@
 ﻿/* Google Maps Variable*/
 var map;
 
+/* Default location to set the map. */
 var defaultLocation = {lat: 51.513413, lng: -0.088961}; 
 
 /*
@@ -12,6 +13,9 @@ var markers = [];
     Polygon drawn on the screen.
 */
 var polygon; 
+
+/* Date Regular Expression */
+var dateReg = RegExp("^(19[5-9][0-9]|20[0-4][0-9]|2050)(0?[1-9]|1[0-2])(0?[1-9]|[12][0-9]|3[01])$"); 
 
 /* Initialises the map instance */
 function initMap()
@@ -85,7 +89,29 @@ $(function()
 {   
     var retrieveButton = $('#retrievebutton'); 
     var resultInfo = $('#resultinfo'); 
+    var startDate = $('#startdate'); 
+    var endDate = $('#enddate'); 
 
+    /* Reset the button to default. */
+    function resetButton()
+    {      
+        retrieveButton.prop('disabled', false);               
+        retrieveButton.html("Retrieve"); 
+    }
+
+    /* Set the result information panel with a message and colour. */
+    function setResultInfo(message, color)
+    {       
+        resultInfo.css("color", color); 
+        resultInfo.html(message); 
+
+        resultInfo.fadeOut(5000, function()
+        {
+            resultInfo.html(""); 
+        }); 
+    }
+
+    /* When the retrieve button is clicked, make an AJAX call to the server to load the transactions. */
     retrieveButton.click(function()
     {       
         retrieveButton.html("Loading..."); 
@@ -95,8 +121,22 @@ $(function()
 
         var bound = new google.maps.LatLngBounds(); 
         var polygonCoords = [];
-        var startdate = $('#startdate').val(); 
-        var enddate = $('#enddate').val(); 
+        var startdate = startDate.val(); 
+        var enddate = endDate.val(); 
+
+        if (!dateReg.test(startdate))
+        {          
+            resetButton(); 
+            setResultInfo("Invalid start date", "red"); 
+            return; 
+        }
+
+        if (!dateReg.test(enddate))
+        {
+            resetButton(); 
+            setResultInfo("Invalid end date", "red"); 
+            return; 
+        }
         
         $.ajax(
         {
@@ -122,28 +162,15 @@ $(function()
 
                 retrieveButton.prop('disabled', false);               
                 retrieveButton.html("Retrieve"); 
-
-                resultInfo.css("color", "green"); 
-                resultInfo.html("Retrieved " + data.transactions.length + " Transactions"); 
-
-                resultInfo.fadeOut(3000, function()
-                {
-                    resultInfo.html(""); 
-                });  
+                setResultInfo("Retrieved " + data.transactions.length + " Transactions", "green");                
             },
             error: function(err, status, message)
             {                
                 console.log(message);                 
-                retrieveButton.prop('disabled', false);               
-                retrieveButton.html("Retrieve"); 
-
-                resultInfo.html(message); 
-                resultInfo.css("color", "red"); 
+                resetButton(); 
+                setResultInfo(message, "red"); 
             }, 
             dataType: 'json'
         });
-
-        
     }); 
 }); 
-
