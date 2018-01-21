@@ -33,7 +33,7 @@
         [HttpGet]
         public ActionResult Index()
         {                      
-            // have to launch vs from the terminal because of this issue: https://www.placona.co.uk/1592/dotnet/osx-pro-tip-for-environment-variables/
+            
             using (var configService = new ConfigurationService())
             using (var httpService = new HttpService())
             using (var service = new MonzoService(httpService, configService.GetEnviroment(EnviromentVariableAccessTokenName)))
