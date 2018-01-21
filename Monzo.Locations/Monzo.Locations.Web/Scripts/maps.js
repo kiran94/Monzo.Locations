@@ -115,17 +115,19 @@ $(function()
                 map.setCenter(bound.getCenter()); 
 			    map.fitBounds(bound); 
 
+                $('#retrievebutton').prop('disabled', false);
 
             },
             error: function(err)
             {
                 alert(err); 
-                console.log(err); 
+                console.log(err);                 
+                $('#retrievebutton').prop('disabled', false);
             }, 
             dataType: 'json'
         });
 
-        $('#retrievebutton').prop('disabled', false);
+        
     }); 
 }); 
 
