@@ -122,6 +122,8 @@ $(function()
 
                 retrieveButton.prop('disabled', false);               
                 retrieveButton.html("Retrieve"); 
+
+                resultInfo.css("color", "green"); 
                 resultInfo.html("Retrieved " + data.transactions.length + " Transactions"); 
 
                 resultInfo.fadeOut(3000, function()
@@ -129,12 +131,14 @@ $(function()
                     resultInfo.html(""); 
                 });  
             },
-            error: function(err)
-            {
-                alert(err); 
-                console.log(err);                 
+            error: function(err, status, message)
+            {                
+                console.log(message);                 
                 retrieveButton.prop('disabled', false);               
                 retrieveButton.html("Retrieve"); 
+
+                resultInfo.html(message); 
+                resultInfo.css("color", "red"); 
             }, 
             dataType: 'json'
         });
