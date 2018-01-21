@@ -80,6 +80,8 @@ $(function () {
     var endDate = $('#enddate');
     var table = $('#transactiontable');
 
+    startDate.focus();
+
     /* Disables the button */
     function disableButton() {
         retrieveButton.html("Loading...");
