@@ -9,7 +9,7 @@ Monzo.Locations is an application based on the [Monzo API](https://monzo.com/doc
 
 ```sh
 export MONZO='<access_token>'
-export GOOGLEMAPS='<google_maps_api_key>'
+export GOOGLEAPI='<google_maps_api_key>'
 ```
 
 You can get your Monzo Access Token from [here](https://developers.monzo.com/) and Google Maps JavaScript API key from [here](https://console.developers.google.com).
