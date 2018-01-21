@@ -18,13 +18,17 @@ You can get your Monzo Access Token from [here](https://developers.monzo.com/) a
 
 3. Launch the the `Monzo.Locations.Web` application. If you are launching from Visual Studio on Mac then please take into account this [issue](https://www.placona.co.uk/1592/dotnet/osx-pro-tip-for-environment-variables/). 
 
-## Example
+## Examples
 If all is well then you should see the following landing screen. *Notice the Authenticated sign on the top right corner.*
-![Landing](LANDING.png)
+![Landing](Images/LANDING.png)
 
 Then all you need to do is enter the range in which you want to see transactions and click `Retrieve`.
 
-![Example](EXAMPLE.png)
+### Global Example
+![GlobalExample](Images/GlobalExample.png)
+
+### Local Example
+![LocalExample](Images/LocalExample.png)
 
 
 *This project has no affiliation with Monzo themselves. I am merely a sole developer making use of the API that they provide.*
