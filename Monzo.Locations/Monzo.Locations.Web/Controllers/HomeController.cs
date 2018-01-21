@@ -4,9 +4,8 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Web;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
-    using System.Web.Mvc.Ajax;
     using Monzo.Locations.Framework.Entities;
     using Monzo.Locations.Framework.Services;
     using Newtonsoft.Json;
@@ -24,7 +23,12 @@
         /// <summary>
         /// The name of the enviroment variable google maps key.
         /// </summary>
-        private string EnviromentVariableGoogleMapsKey = "GOOGLEAPI"; 
+        private string EnviromentVariableGoogleMapsKey = "GOOGLEAPI";
+
+        /// <summary>
+        /// Locking object for multi threaded processing of the transaction requests. 
+        /// </summary>
+        private static object lockObject = new object(); 
 
         /// <summary>
         /// Home Page.
@@ -77,16 +81,26 @@
                     throw new MissingMemberException("No Accounts found");                     
                 }
 
-                Transactions returnedTransactions = new Transactions() { TransactionList = new List<Transaction>() }; 
+                Transactions returnedTransactions = new Transactions() { TransactionList = new List<Transaction>() };
+                List<Task> accountTasks = new List<Task>(account.AccountList.Count()); 
 
-                foreach(Account currentAccount in account.AccountList)
+                foreach (Account currentAccount in account.AccountList)
                 {
-                    var currentTransactions = service.GetPhysicalTransactionsByDate(currentAccount, parsedStart, parsedEnd).TransactionList;
+                    accountTasks.Add(Task.Factory.StartNew(() =>
+                    {
+                        var currentTransactions = service.GetPhysicalTransactionsByDate(currentAccount, parsedStart, parsedEnd).TransactionList;
 
-                    returnedTransactions.TransactionList = returnedTransactions.TransactionList.Union(currentTransactions);
+                        lock (lockObject)
+                        {
+                            returnedTransactions.TransactionList = returnedTransactions.TransactionList.Union(currentTransactions);
+                        }
+                    }));                                                                            
                 }
-                               
-                return JsonConvert.SerializeObject(returnedTransactions);          
+
+                Task.WaitAll(accountTasks.ToArray());              
+                returnedTransactions.TransactionList = returnedTransactions.TransactionList.OrderBy(x => x.Created); 
+
+                return JsonConvert.SerializeObject(returnedTransactions);      
             }
         }
     }
