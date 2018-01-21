@@ -12,7 +12,7 @@ export MONZO='<access_token>'
 export GOOGLEMAPS='<google_maps_api_key>'
 ```
 
-You can get your Monzo Access Token from [here](https://developers.monzo.com/) and Google key from [here](https://console.developers.google.com).
+You can get your Monzo Access Token from [here](https://developers.monzo.com/) and Google Maps JavaScript API key from [here](https://console.developers.google.com).
 
 *Currently the project only supports access token authentication for the monzo API. This is because I was having some difficulty setting up the authentication with the OAUTH2 service since I do not have anywhere to host the redirect url.*
 
@@ -38,3 +38,7 @@ Once you have some transactions loaded, you can scroll down to view more detaile
 
 
 *This project has no affiliation with Monzo themselves. I am merely a sole developer making use of the API that they provide.*
+
+
+
+
