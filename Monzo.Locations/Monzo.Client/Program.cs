@@ -8,7 +8,7 @@
     /// <summary>
     /// Main class.
     /// </summary>
-    public class MainClass
+    public static class MainClass
     {
         /// <summary>
         /// The name of the enviroment variable for access token.
