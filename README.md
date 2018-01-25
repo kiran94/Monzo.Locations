@@ -1,4 +1,4 @@
-# Monzo.Locations 🚀 ![cibadge](https://ci.appveyor.com/api/projects/status/2k111gualyuq821n?svg=true)
+# Monzo.Locations 🚀 ![cibadge](https://ci.appveyor.com/api/projects/status/2k111gualyuq821n?svg=true) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8d3b7472aa5449fabe3ea96eca2629f)](https://www.codacy.com/app/kiran94/Monzo.Locations?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kiran94/Monzo.Locations&amp;utm_campaign=Badge_Grade)
 
 Monzo.Locations is an application based on the [Monzo API](https://monzo.com/docs/) to provide visualisations on transactional data. 
 
@@ -9,7 +9,7 @@ Monzo.Locations is an application based on the [Monzo API](https://monzo.com/doc
 
 ```sh
 export MONZO='<access_token>'
-export GOOGLEMAPS='<google_maps_api_key>'
+export GOOGLEAPI='<google_maps_api_key>'
 ```
 
 You can get your Monzo Access Token from [here](https://developers.monzo.com/) and Google Maps JavaScript API key from [here](https://console.developers.google.com).
