@@ -153,12 +153,12 @@ $(function () {
                     <td>` + currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + + currentDate.getSeconds() + `</td>
                     <td>` + value.merchant.address.Latitude + `</td>
                     <td>` + value.merchant.address.longitude + `</td>
-                </tr>`
+                </tr>`; 
 
             allrows += currentRow;
         });
 
-        allrows += "</tbody>"
+        allrows += "</tbody>"; 
 
         table.html(allrows);
     }
@@ -196,7 +196,7 @@ $(function () {
                     var address = value.merchant.address;
                     var currentLocation = new google.maps.LatLng(address.Latitude, address.longitude);
 
-                    addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")")
+                    addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")"); 
 
                     polygonCoords.push(currentLocation);
                     bound.extend(currentLocation);
