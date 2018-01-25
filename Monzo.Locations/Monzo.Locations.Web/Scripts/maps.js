@@ -15,7 +15,7 @@ var dateReg = RegExp("^(19[5-9][0-9]|20[0-4][0-9]|2050)(0?[1-9]|1[0-2])(0?[1-9]|
 
 /* Initialises the map instance */
 function initMap() {
-    map = new google.maps.Map(document.getElementById('map'),
+    map = new google.maps.Map(document.getElementById("map"),
         {
             center: defaultLocation,
             scrollwheel: false,
@@ -34,7 +34,7 @@ function addMarker(location, title) {
             animation: google.maps.Animation.DROP
         });
 
-    google.maps.event.addListener(newMarker, 'click', function () {
+    google.maps.event.addListener(newMarker, "click", function () {
         infowindow.setContent(title);
         infowindow.open(map, this);
         infowindow.text(newMarker.info);
@@ -50,7 +50,7 @@ function GeneratePolyline(polygonCoords) {
     return new google.maps.Polyline({
         path: polygonCoords,
         geodesic: true,
-        strokeColor: '#FF0000',
+        strokeColor: "#FF0000",
         strokeOpacity: 1.0,
         strokeWeight: 2
     });
@@ -74,23 +74,23 @@ function clearMarkers() {
 
 /* Run after document load. */
 $(function () {
-    var retrieveButton = $('#retrievebutton');
-    var resultInfo = $('#resultinfo');
-    var startDate = $('#startdate');
-    var endDate = $('#enddate');
-    var table = $('#transactiontable');
+    var retrieveButton = $("#retrievebutton");
+    var resultInfo = $("#resultinfo");
+    var startDate = $("#startdate");
+    var endDate = $("#enddate");
+    var table = $("#transactiontable");
 
     startDate.focus();
 
     /* Disables the button */
     function disableButton() {
         retrieveButton.html("Loading...");
-        retrieveButton.prop('disabled', true);
+        retrieveButton.prop("disabled", true);
     }
 
     /* Reset the button to default. */
     function resetButton() {
-        retrieveButton.prop('disabled', false);
+        retrieveButton.prop("disabled", false);
         retrieveButton.html("Retrieve");
     }
 
@@ -188,9 +188,9 @@ $(function () {
 
         $.ajax(
         {
-            url: 'http://127.0.0.1:8080/Home/GetTransactions',
+            url: "http://127.0.0.1:8080/Home/GetTransactions",
             data: { startDate: startdate, endDate: enddate },
-            dataType: 'json',
+            dataType: "json",
             success: function (data, status, xhr) {
                 $.each(data.transactions, function (index, value) {
                     var address = value.merchant.address;
@@ -200,7 +200,7 @@ $(function () {
 
                     polygonCoords.push(currentLocation);
                     bound.extend(currentLocation);
-                })
+                }); 
 
                 polygon = GeneratePolyline(polygonCoords);
                 polygon.setMap(map);
@@ -214,7 +214,6 @@ $(function () {
                 generateTable(data.transactions);
             },
             error: function (err, status, message) {
-                console.log(message);
                 resetButton();
                 setResultInfo(message, "red");
             }
