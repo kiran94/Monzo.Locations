@@ -131,7 +131,7 @@ $(function () {
             var currentDate = new Date(value.created);
             var currentMonth = monthNames[currentDate.getMonth()]; 
             
-            if (currentMonth != previousMonth)
+            if (currentMonth !== previousMonth)
             {
                 previousMonth = currentMonth; 
                 allrows += 
@@ -196,7 +196,7 @@ $(function () {
                     var address = value.merchant.address;
                     var currentLocation = new google.maps.LatLng(address.Latitude, address.longitude);
 
-                    addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")"); 
+                    addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")");
 
                     polygonCoords.push(currentLocation);
                     bound.extend(currentLocation);
