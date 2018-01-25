@@ -17,7 +17,7 @@
         /// <summary>
         /// Flag indicating if the class is disposed or not.
         /// </summary>
-        private bool disposedValue = false;
+        private bool disposedValue;
 
         /// <summary>
         /// Dispose the resources if we are disposing from the Dispose method and not the finaliser..

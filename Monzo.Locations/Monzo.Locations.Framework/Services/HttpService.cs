@@ -11,7 +11,7 @@
     public class HttpService : IHttpService
     {
         /// <inheritdoc/>
-        public async Task<string> GetJson(string url, IDictionary<string, string> headers = null)
+        public async Task<string> GetJson(string url, IDictionary<string, string> headers)
         {
             using(HttpClient client = new HttpClient())
             {
@@ -40,7 +40,7 @@
         /// <summary>
         /// Flag indicating if the class is disposed or not.
         /// </summary>
-        private bool disposedValue = false;
+        private bool disposedValue;
 
         /// <summary>
         /// Dispose the resources if we are disposing from the Dispose method and not the finaliser..

@@ -18,12 +18,12 @@
         /// <summary>
         /// The name of the enviroment variable for access token.
         /// </summary>
-        private string EnviromentVariableAccessTokenName = "MONZO";
+        private readonly string EnviromentVariableAccessTokenName = "MONZO";
 
         /// <summary>
         /// The name of the enviroment variable google maps key.
         /// </summary>
-        private string EnviromentVariableGoogleMapsKey = "GOOGLEAPI";
+        private readonly string EnviromentVariableGoogleMapsKey = "GOOGLEAPI";
 
         /// <summary>
         /// Locking object for multi threaded processing of the transaction requests. 
@@ -81,8 +81,8 @@
                     throw new MissingMemberException("No Accounts found");                     
                 }
 
-                Transactions returnedTransactions = new Transactions() { TransactionList = new List<Transaction>() };
-                List<Task> accountTasks = new List<Task>(account.AccountList.Count()); 
+                var returnedTransactions = new Transactions { TransactionList = new List<Transaction>() };
+                var accountTasks = new List<Task>(account.AccountList.Count()); 
 
                 foreach (Account currentAccount in account.AccountList)
                 {

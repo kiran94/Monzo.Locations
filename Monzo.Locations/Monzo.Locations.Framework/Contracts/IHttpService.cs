@@ -14,7 +14,7 @@
         /// </summary>
         /// <returns>The get.</returns>
         /// <param name="url">URL.</param>
-        /// <param name="headers">(optional) headers for the HTTP request.</param>
-        Task<string> GetJson(string url, IDictionary<string, string> headers = null); 
+        /// <param name="headers">headers for the HTTP request.</param>
+        Task<string> GetJson(string url, IDictionary<string, string> headers); 
     }
 }

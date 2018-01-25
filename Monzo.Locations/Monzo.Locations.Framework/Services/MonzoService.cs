@@ -84,7 +84,7 @@
                 throw new ArgumentException($"Ensure {this.AccessToken} env variable is set."); 
             }
                        
-            Dictionary<string, string> headers = new Dictionary<string, string>()
+            Dictionary<string, string> headers = new Dictionary<string, string>
             {
                 {
                     "Authorization",
@@ -124,7 +124,7 @@
         /// <summary>
         /// Flag indicating if the class is disposed or not.
         /// </summary>
-        private bool disposedValue = false;
+        private bool disposedValue;
 
         /// <summary>
         /// Dispose the resources if we are disposing from the Dispose method and not the finaliser..
@@ -137,7 +137,10 @@
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
+                    if (this.httpService != null)
+                    {
+                        this.httpService.Dispose();
+                    }
                 }
 
                 // free unmanaged resources (unmanaged objects) and override a finalizer below.
