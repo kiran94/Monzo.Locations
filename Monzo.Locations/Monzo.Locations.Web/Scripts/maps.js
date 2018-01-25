@@ -46,7 +46,7 @@ function addMarker(location, title) {
 /*
   Generates a polygon
 */
-function GeneratePolyline(polygonCoords) {
+function generatePolyline(polygonCoords) {
     return new google.maps.Polyline({
         path: polygonCoords,
         geodesic: true,
@@ -202,7 +202,7 @@ $(function () {
                     bound.extend(currentLocation);
                 }); 
 
-                polygon = GeneratePolyline(polygonCoords);
+                polygon = generatePolyline(polygonCoords);
                 polygon.setMap(map);
 
                 map.setCenter(bound.getCenter());
