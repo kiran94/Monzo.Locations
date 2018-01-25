@@ -73,7 +73,6 @@
             using (var httpService = new HttpService())
             using (var service = new MonzoService(httpService, configService.GetEnviroment(EnviromentVariableAccessTokenName)))
             {
-                var auth = service.GetAuthentication(); 
                 var account = service.GetAccounts();
 
                 if (account == null || account.AccountList == null || account.AccountList.Count == 0)
