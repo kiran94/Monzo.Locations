@@ -1,5 +1,5 @@
-# Monzo.Locations 🚀 
-![cibadge](https://ci.appveyor.com/api/projects/status/2k111gualyuq821n?svg=true) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8d3b7472aa5449fabe3ea96eca2629f)](https://www.codacy.com/app/kiran94/Monzo.Locations?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kiran94/Monzo.Locations&amp;utm_campaign=Badge_Grade) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Monzo.Locations 🚀 ![cibadge](https://ci.appveyor.com/api/projects/status/2k111gualyuq821n?svg=true) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8d3b7472aa5449fabe3ea96eca2629f)](https://www.codacy.com/app/kiran94/Monzo.Locations?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kiran94/Monzo.Locations&amp;utm_campaign=Badge_Grade) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Monzo.Locations is an application based on the [Monzo API](https://monzo.com/docs/) to provide visualisations on transactional data. 
 
