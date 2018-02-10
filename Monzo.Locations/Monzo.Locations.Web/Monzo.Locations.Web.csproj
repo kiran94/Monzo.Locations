@@ -59,8 +59,14 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\Monzo.Framework.0.0.7\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Monzo.Framework">
+      <HintPath>..\packages\Monzo.Framework.0.0.7\lib\Monzo.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Monzo.Framework.0.0.7\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

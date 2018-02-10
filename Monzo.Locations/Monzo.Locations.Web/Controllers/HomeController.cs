@@ -28,7 +28,7 @@
         /// <summary>
         /// Locking object for multi threaded processing of the transaction requests. 
         /// </summary>
-        private static object lockObject = new object(); 
+        private static object lockObject = new object();
 
         /// <summary>
         /// Home Page.
@@ -36,18 +36,17 @@
         /// <returns>The index.</returns>
         [HttpGet]
         public ActionResult Index()
-        {                      
-            
-            using (var configService = new ConfigurationService())
-            using (var httpService = new HttpService())
-            using (var service = new MonzoService(httpService, configService.GetEnviroment(EnviromentVariableAccessTokenName)))
-            {
-                var auth = service.GetAuthentication();
-                ViewData["authenticated"] = auth.Authenticated ? "Authenticated" : "Not Authenticated";
-                ViewData["googlemapskey"] = configService.GetEnviroment(EnviromentVariableGoogleMapsKey); 
-            }
+        {
+            var configService = new ConfigurationService();
+            var accountService = Monzo.Framework.Factory.CreateAccountService();
+            var accounts = accountService.GetAccountsAsync();
 
-            return View(); 
+            ViewData["googlemapskey"] = configService.GetEnviroment(EnviromentVariableGoogleMapsKey);
+           
+            Task.WaitAll(accounts);
+            ViewData["authenticated"] = accounts.Result.AccountCollection.Any() ? "Authenticated" : "Not Authenticated";
+
+            return View();
         }
 
         /// <summary>
