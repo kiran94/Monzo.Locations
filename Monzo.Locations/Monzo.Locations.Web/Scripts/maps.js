@@ -195,11 +195,11 @@ $(function () {
             data: { startDate: startdate, endDate: enddate },
             dataType: "json",
             success: function (data, status, xhr) {
-                $.each(data.transactions, function (index, value) {
-                    var address = value.merchant.address;
-                    var currentLocation = new google.maps.LatLng(address.Latitude, address.longitude);
+                $.each(data, function (index, value) {
+                    var address = value.Merchant.Address;
+                    var currentLocation = new google.maps.LatLng(Address.Latitude, Address.Longitude);
 
-                    addMarker(currentLocation, value.merchant.name + "\n" + "(" + value.created + ")");
+                    addMarker(currentLocation, value.Merchant.Name + "\n" + "(" + Value.Created + ")");
 
                     polygonCoords.push(currentLocation);
                     bound.extend(currentLocation);

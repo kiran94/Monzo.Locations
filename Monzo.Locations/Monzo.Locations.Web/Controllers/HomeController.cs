@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Monzo.Locations.Framework.Entities;
+    using Monzo.Framework.Entities;
     using Monzo.Locations.Framework.Services;
     using Newtonsoft.Json;
 
@@ -15,11 +15,6 @@
     /// </summary>
     public class HomeController : Controller
     {
-        /// <summary>
-        /// The name of the enviroment variable for access token.
-        /// </summary>
-        private readonly string EnviromentVariableAccessTokenName = "MONZO";
-
         /// <summary>
         /// The name of the enviroment variable google maps key.
         /// </summary>
@@ -45,6 +40,7 @@
             ViewData["BaseURL"] = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
 
             Task.WaitAll(accounts);
+
             ViewData["authenticated"] = accounts.Result.AccountCollection.Any() ? "Authenticated" : "Not Authenticated";
 
             return View();
@@ -69,38 +65,35 @@
                 throw new ArgumentException($"{nameof(endDate)} could not be parsed"); 
             }
 
-            using (var configService = new ConfigurationService())
-            using (var httpService = new HttpService())
-            using (var service = new MonzoService(httpService, configService.GetEnviroment(EnviromentVariableAccessTokenName)))
+            var accountService = Monzo.Framework.Factory.CreateAccountService();
+            var accounts = accountService.GetAccountsAsync();
+
+            var transactionService = Monzo.Framework.Factory.CreateTransactionService();
+            var transactions = new List<Monzo.Framework.Entities.Transaction>();
+            var accountTasks = new List<Task>(accounts.Result.AccountCollection.Count());
+
+            foreach (var account in accounts.Result.AccountCollection)
             {
-                var account = service.GetAccounts();
-
-                if (account == null || account.AccountList == null || account.AccountList.Count == 0)
+                accountTasks.Add(Task.Factory.StartNew(() =>
                 {
-                    throw new MissingMemberException("No Accounts found");                     
-                }
-
-                var returnedTransactions = new Transactions { TransactionList = new List<Transaction>() };
-                var accountTasks = new List<Task>(account.AccountList.Count()); 
-
-                foreach (Account currentAccount in account.AccountList)
-                {
-                    accountTasks.Add(Task.Factory.StartNew(() =>
+                    var currentTransactions = transactionService.GetTransactionsByDateAsync(account, parsedStart, parsedEnd)
+                                                           .Result
+                                                           .TransactionCollection
+                                                           .Where(x => x.Merchant != null
+                                                                  && x.Merchant.Address != null
+                                                           //&& !x.Merchant.IsOnline
+                                                           // temp fix to filter out TFL transactions as they come out as offline transactions. 
+                                                           // But the Address seems to be thier office.
+                                                           && x.Merchant.ID != "merch_0000987lak9C9IRzz93Xaj");
+                    lock (lockObject)
                     {
-                        var currentTransactions = service.GetPhysicalTransactionsByDate(currentAccount, parsedStart, parsedEnd).TransactionList;
-
-                        lock (lockObject)
-                        {
-                            returnedTransactions.TransactionList = returnedTransactions.TransactionList.Union(currentTransactions);
-                        }
-                    }));                                                                            
-                }
-
-                Task.WaitAll(accountTasks.ToArray());              
-                returnedTransactions.TransactionList = returnedTransactions.TransactionList.OrderBy(x => x.Created); 
-
-                return JsonConvert.SerializeObject(returnedTransactions);      
+                        transactions = transactions.Union(currentTransactions).ToList();
+                    }                                      
+                }));                                                              
             }
+
+            Task.WaitAll(accountTasks.ToArray());
+            return JsonConvert.SerializeObject(transactions);           
         }
     }
 }
