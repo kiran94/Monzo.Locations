@@ -79,7 +79,7 @@ $(function () {
     var startDate = $("#startdate");
     var endDate = $("#enddate");
     var table = $("#transactiontable");
-
+   
     startDate.focus();
 
     /* Disables the button */
@@ -186,9 +186,12 @@ $(function () {
             return;
         }
 
+        var baseurl = $('#url').val();
+        var url = baseurl + "Home/GetTransactions";
+
         $.ajax(
         {
-            url: "http://127.0.0.1:8080/Home/GetTransactions",
+            url: url,
             data: { startDate: startdate, endDate: enddate },
             dataType: "json",
             success: function (data, status, xhr) {

@@ -36,13 +36,14 @@
         /// <returns>The index.</returns>
         [HttpGet]
         public ActionResult Index()
-        {
+        {          
             var configService = new ConfigurationService();
             var accountService = Monzo.Framework.Factory.CreateAccountService();
             var accounts = accountService.GetAccountsAsync();
 
             ViewData["googlemapskey"] = configService.GetEnviroment(EnviromentVariableGoogleMapsKey);
-           
+            ViewData["BaseURL"] = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+
             Task.WaitAll(accounts);
             ViewData["authenticated"] = accounts.Result.AccountCollection.Any() ? "Authenticated" : "Not Authenticated";
 
